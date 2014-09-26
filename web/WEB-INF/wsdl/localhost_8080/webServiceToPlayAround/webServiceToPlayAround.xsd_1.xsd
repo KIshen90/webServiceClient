@@ -2,8 +2,6 @@
 
 <xs:element name="addRecord" type="tns:addRecord"/>
 
-<xs:element name="userinfo" type="tns:userinfo"/>
-
 <xs:element name="verify" type="tns:verify"/>
 
 <xs:element name="verifyResponse" type="tns:verifyResponse"/>
@@ -27,17 +25,7 @@
 
 <xs:complexType name="verifyResponse">
 <xs:sequence>
-<xs:element name="return" type="tns:userinfo" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="userinfo">
-<xs:sequence>
-<xs:element name="age" type="xs:int" minOccurs="0"/>
-<xs:element name="firstName" type="xs:string" minOccurs="0"/>
-<xs:element name="lastName" type="xs:string" minOccurs="0"/>
-<xs:element name="password" type="xs:int" minOccurs="0"/>
-<xs:element name="username" type="xs:string" minOccurs="0"/>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 </xs:schema>
