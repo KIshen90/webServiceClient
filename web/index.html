@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Simple Login System</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+
+        <link rel="stylesheet" href="style.css">
+
+        <script type="text/javascript">
+
+            $(document).ready(function() {
+                $(".sendData").show();
+                $(".createRecords").hide();
+                $(".valueData").hide();
+                $(".labelWarning").hide();
+                $(".sucess").hide();
+                $(".display").hide();
+            });
+
+            $(document).ready(function() {
+                document.getElementById("username").value("");
+                document.getElementById("firstname").value("");
+                document.getElementById("lastname").value("");
+                document.getElementById("age").value(" ");
+                document.getElementById("password").value("");
+
+            });
+
+            function createUser() {
+                username = $('[name=username]').val();
+                first_name = $('[name=firstname]').val();
+                last_name = $('[name=lastname]').val();
+                age = $('[name=age]').val();
+                password = $('[name=password]').val();
+                alert(username);
+
+                $.post("createRecords/createRecords.jsp", {'username': username, 'firstname': first_name, 'lastname': last_name, 'age': age, 'password': password},
+                function(data) {
+                    alert("Successful jsp");
+                    $(".createRecords").hide();
+                    $(".labelWarning").hide();
+                    $(".sucess").show();
+                }
+                );
+            }
+
+            function displayRegisterForm() {
+                $(".createRecords").show();
+                $(".sendData").hide();
+                $(".display").hide();
+            }
+
+            function displayFrontPage() {
+                $(".createRecords").hide();
+                $(".sendData").show();
+                $(".labelWarning").hide();
+                $(".sucess").hide();
+                $(".display").hide();
+            }
+            
+            function displayDisplay(){
+                $(".display").show();
+            }
+            function verifyUser() {
+                username = $('[name=usernameData]').val();
+                password = $('[name=passwordData]').val();
+                alert(username);
+
+                $(".createRecords").hide();
+                $(".sendData").hide();
+                //alert(pdata.first_name);
+                $.post("autheticate/authenticate.jsp", {'username': username, 'password': password},
+                function(data) {
+                    $(".valueData").val(data);
+                    if (document.getElementById("valueData").value.replace(/ /g, '') == "null")
+                    {
+                        $(".createRecords").show();
+                        $(".labelWarning").show();
+
+                    } else
+                    {
+                        displayDisplay();
+                        $(".display").html(data);
+                    }
+                }
+                );
+            }
+        </script>
+
+    </head>
+    <body>
+        <div class="createRecords center-block form-div">
+            <h1>Registration form.</h1>
+            <div class="form-group has-feedback">
+                <label class="control-label">Username:</label>
+                <input type="text" name="username" class="form-control" placeholder="Username" />
+                <i class="glyphicon glyphicon-user form-control-feedback"></i>
+            </div>
+            <div class="form-group has-feedback">
+                <label class="control-label">First Name:</label>
+                <input type="text" name="firstname" class="form-control" placeholder="First Name" />
+                <i class="glyphicon glyphicon-user form-control-feedback"></i>
+            </div>
+            <div class="form-group has-feedback">
+                <label class="control-label">Last Name:</label>
+                <input type="text" name="lastname" class="form-control" placeholder="Last Name" />
+                <i class="glyphicon glyphicon-user form-control-feedback"></i>
+            </div>
+            <div class="form-group has-feedback">
+                <label class="control-label">Age:</label>
+                <input type="text" name="age" class="form-control" placeholder="Age" />
+                <i class="glyphicon glyphicon-user form-control-feedback"></i>
+            </div>
+            <div class="form-group has-feedback">
+                <label class="control-label">Password:</label>
+                <input type="password" name="password" class="form-control" placeholder="Password" />
+                <i class="glyphicon glyphicon-user form-control-feedback"></i>
+            </div>
+
+            <input type="button" class="btn-lg btn-danger" value="Submit" onclick="createUser()"/><br><br>
+
+            <a href="#" onclick="displayFrontPage()"><span style="color:white">Click here to Login</span></a>
+        </div>
+
+        <div class="sendData center-block form-div">
+            <h1>Welcome to SimpleLogin</h1>
+            <p>Please login!</p>
+            <div class="form-group has-feedback">
+                <label class="control-label">Username:</label>
+                <input type="text" name="usernameData" class="form-control" placeholder="Username" />
+                <i class="glyphicon glyphicon-user form-control-feedback"></i>
+            </div>
+
+            <div class="form-group has-feedback">
+                <label class="control-label">Password:</label>
+                <input type="password" name="passwordData" class="form-control" placeholder="Password" />
+                <i class="glyphicon glyphicon-pencil form-control-feedback"></i>
+            </div> 
+            <a href="#" onclick="displayRegisterForm()" >Register for a new account with SimpleLogin.</a><br><br>
+            <input type="button" class="btn-lg btn-warning" value="Submit"  onclick="verifyUser()"/><br><br>
+
+        </div>
+
+        <div class="labelWarning"><label style="color:red ">Username and password didn't match. Try again or create a new account.</label></div>
+
+        <div class="display center-block form-div"><input type="button" class="btn-danger">Logout</input></div>
+
+        <div> <input type="text" class="valueData" id="valueData"/> </div>
+
+        <div class="sucess center-block form-div"><h1 style="color:green ">Sucessfully created your account. Please login to see your information.</h1>
+            <a href="#" onclick="displayFrontPage()"><span style="color:white;font-size:30px">Login</span></a>
+
+        </div>
+
+</html>

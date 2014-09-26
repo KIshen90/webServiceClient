@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="http://asus:8080/webServiceToPlayAround/webServiceToPlayAround?wsdl" uri="src/conf/xml-resources/web-service-references/webServiceToPlayAround/wsdl/asus_8080/webServiceToPlayAround/webServiceToPlayAround.wsdl"/>
+    <system systemId="http://asus:8080/webServiceToPlayAround/webServiceToPlayAround?xsd=1" uri="src/conf/xml-resources/web-service-references/webServiceToPlayAround/wsdl/asus_8080/webServiceToPlayAround/webServiceToPlayAround.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/webServiceToPlayAround/webServiceToPlayAround?wsdl" uri="src/conf/xml-resources/web-service-references/webServiceToPlayAround/wsdl/localhost_8080/webServiceToPlayAround/webServiceToPlayAround.wsdl"/>
+    <system systemId="http://localhost:8080/webServiceToPlayAround/webServiceToPlayAround?xsd=1" uri="src/conf/xml-resources/web-service-references/webServiceToPlayAround/wsdl/localhost_8080/webServiceToPlayAround/webServiceToPlayAround.xsd_1.xsd"/>
+</catalog>
